@@ -52,6 +52,9 @@ Primeiro projeto da empresa Cubo Mestre. Projeto piloto para desenvolver as habi
 ## Criando projeto django
 Para criar um projeto Django utilizamos o comando `django-admin startproject setup .`, normalmente utiliza-se o nome **setup** para o nome do projeto. Nesta pasta ficará os arquivos responsáveis pelas configurações do projeto. O . no final do nome significa criar o projeto na pasta atual. Sem o . o projeto ficará dentro de outra pasta.
 
+## Criando super usuário
+* `python manage.py createsuperuser` nome admin, senha a@1234, email -
+
 ## Criando a aplicação
 Para criar uma aplicação para gerar funcionalidades ao projeto, utilizamos o comando `python manage.py startapp app`, lembrando que app pode ser qualquer nome significativo.
 
@@ -69,3 +72,16 @@ Utilizar o comando `python manage.py runserver` para rodar a aplicação, se tud
 No Django existem dois comandos essenciais para interagir com banco de dados. O primeiro comando é o `python manage.py makemigrations` que diz ao django todos os modelos e alterações nos modelos que façamos.
 
 O outro comando é o `python manage.py migrate` que diz ao django para executarmos as mudanças.
+
+# Git Desenvolvimento
+
+## Branchs
+* main
+* funcionario
+
+## Funcionário
+Foi criado uma **branch** para lidar com o desenvolvimento relacionado aos funcionários.
+
+|Branch|Entidade|Relacionamento|Descrição|
+|---|---|---|---|
+|funcionario|Funcionario|TipoFuncionario|criar crud básico|
