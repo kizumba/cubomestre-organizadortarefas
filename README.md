@@ -16,6 +16,10 @@ Primeiro projeto da empresa Cubo Mestre. Projeto piloto para desenvolver as habi
 * CSS
 * JS
 
+## IDE
+* Visual Code
+* PyCharm
+
 ## Documentação 
 * Markdown - usando para escrever a documentação - https://docs.pipz.com/central-de-ajuda/learning-center/guia-basico-de-markdown#open
 
@@ -36,5 +40,32 @@ Primeiro projeto da empresa Cubo Mestre. Projeto piloto para desenvolver as habi
 * `pip install -r requirements.txt` instalar todas as dependências do arquivo.
 
 ## Django
+### Instalações
 * `pip install django` para instalar o Django
 * `pip install django-bootstrap4` para usar css direto no projeto.
+
+### Projeto
+* `django-admin startproject <nome>` criar projeto
+* `python manage.py startapp <nome>` criar aplicação
+
+# Projeto001 - Organizador de Tarefas
+## Criando projeto django
+Para criar um projeto Django utilizamos o comando `django-admin startproject setup .`, normalmente utiliza-se o nome **setup** para o nome do projeto. Nesta pasta ficará os arquivos responsáveis pelas configurações do projeto. O . no final do nome significa criar o projeto na pasta atual. Sem o . o projeto ficará dentro de outra pasta.
+
+## Criando a aplicação
+Para criar uma aplicação para gerar funcionalidades ao projeto, utilizamos o comando `python manage.py startapp app`, lembrando que app pode ser qualquer nome significativo.
+
+Este projeto concentrará todos os models no mesmo app, assim não será necessário dar um nome melhor.
+
+## Configurando o arquivo settings.py
+Dentro da pasta **setup** abrir o arquivo **settings.py**, adicionar nossa **app** na variável INSTALLED_APPS.
+
+Alterar a variável LANGUAGE_CODE para pt-br. Alterar a variável TIME_ZONE para America/Sao_Paulo.
+
+## Testando servidor
+Utilizar o comando `python manage.py runserver` para rodar a aplicação, se tudo ocorrer bem, a página padrão do django será mostrada.
+
+## Banco de dados
+No Django existem dois comandos essenciais para interagir com banco de dados. O primeiro comando é o `python manage.py makemigrations` que diz ao django todos os modelos e alterações nos modelos que façamos.
+
+O outro comando é o `python manage.py migrate` que diz ao django para executarmos as mudanças.
