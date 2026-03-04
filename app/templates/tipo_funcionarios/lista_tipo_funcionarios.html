@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Tipos de Funcionários
+{% endblock %}
+
+{% block content %}
+
+<h2>Cadastrar novo tipo de funcionário</h2>
+<a href="{% url 'criar_tipo_funcionario' %}" class="btn btn-primary">Cadastrar novo</a>
+<h1>Lista de tipos de Funcionários</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Função</th>
+      <th scope="col">Descrição</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tipo_funcionario in object_list %}
+    <tr>
+      <th scope="row">{{tipo_funcionario.pk}}</th>
+      <td>{{tipo_funcionario.funcao}}</td>
+      <td>{{tipo_funcionario.descricao}}</td>
+      <td>
+        <a href="{% url 'atualizar_tipo_funcionario' pk=tipo_funcionario.pk %}" class="btn btn-primary btn-sm">Editar</a>
+        <a href="{% url 'apagar_tipo_funcionario' pk=tipo_funcionario.pk %}" class="btn btn-danger btn-sm">Apagar</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

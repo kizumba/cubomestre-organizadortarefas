@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block page_title %}
+Tipos de Funcionários
+{% endblock %}
+
+{% block content %}
+
+<h1>Excluir Tipo de Funcionário</h1>
+<p>Você deseja realmente exlcuir o tipo de funcionário <b>{{object.funcao}}?</b></p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Apagar" class="btn btn-danger">
+    <a href="{% url 'lista_tipo_funcionarios' %}" class="btn btn-secondary">Voltar</a>
+</form>
+
+{% endblock %}

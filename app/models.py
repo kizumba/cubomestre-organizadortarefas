@@ -100,7 +100,7 @@ class TipoFuncionario(models.Model):
         ("Gerente", "Gerente"),
         ("Colaborador", "Colaborador"),
     )
-    funcao = models.CharField(max_length=13, choices=FUNCAO_CHOICES, null=False, blank=False)
+    funcao = models.CharField(max_length=13, choices=FUNCAO_CHOICES, null=False, blank=False, unique=True)
     descricao = models.TextField(null=True, blank=True)
 
     def __str__(self):
