@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Funcionários
+{% endblock %}
+
+{% block content %}
+<h2>Novo registro</h2>
+<a href="{% url 'criar_funcionario' %}" class="btn btn-primary">Cadastrar novo funcionário</a>
+<a href="{% url 'lista_funcionarios' %}" class="btn btn-secondary">Voltar</a>
+<h1>Funcionário #{{funcionario.pk}} - {{funcionario.nome}}</h1>
+<h2>Dados pessoais</h2>
+<ul>
+    <li>Nome: {{funcionario.nome}}</li>
+    <li>Sexo: {{funcionario.sexo}}</li>
+    <li>Data de Nascimento: {{funcionario.data_nascimento}}</li>
+    <li>CPF: {{funcionario.cpf}}</li>
+    <li>Salário: {{funcionario.salario}}</li>
+</ul>
+<h2>Endereço</h2>
+<p>Rua {{funcionario.endereco.logradouro}}, {{funcionario.endereco.numero}}, 
+    {{funcionario.endereco.bairro}}, {{funcionario.endereco.cidade}} - {{funcionario.endereco.uf}}. CEP: {{funcionario.endereco.cep}}</p>
+<h2>Contato</h2>
+<ul>
+    <li>E-mail: {{funcionario.contato.email}}</li>
+    <li>Telefone: {{funcionario.contato.telefone}}</li>
+</ul>
+<h2>Função</h2>
+<ul>
+    <li>Tipo: {{funcionario.tipo_funcionario.funcao}}</li>
+</ul>
+<h2>Sistema</h2>
+<ul>
+    <li>{{funcionario.criado_em}}</li>
+    <li>{{funcionario.modificado_em}}</li>
+</ul>
+{% endblock %}

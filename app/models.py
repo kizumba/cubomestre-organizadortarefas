@@ -114,9 +114,10 @@ class Funcionario(models.Model):
     cpf = models.CharField(max_length=11, unique=True)
     salario = models.DecimalField(max_digits=10,decimal_places=2)
     criado_em = models.DateTimeField(auto_now_add=True)
-    modidicado_em = models.DateTimeField(auto_now=True)
+    modificado_em = models.DateTimeField(auto_now=True)
 
     contato = models.ForeignKey(to=Contato, on_delete=models.CASCADE)
+    endereco = models.ForeignKey(to=Endereco, on_delete=models.CASCADE, related_name="funcionario")
     tipo_funcionario = models.ForeignKey(to=TipoFuncionario, on_delete=models.SET_NULL, null=True)
 
     habilidades = models.ManyToManyField(
@@ -126,7 +127,7 @@ class Funcionario(models.Model):
         related_name="funcionarios"
     )
 
-    endereco = models.ForeignKey(to=Endereco, on_delete=models.CASCADE, related_name="funcionario")
+    
 
     def __str__(self):
         return f"RA: {self.pk}, Nome: {self.nome}, Cargo: {self.tipo_funcionario}"

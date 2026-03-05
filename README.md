@@ -79,9 +79,11 @@ O outro comando é o `python manage.py migrate` que diz ao django para executarm
 * main
 * funcionario
 
-## Funcionário
-Foi criado uma **branch** para lidar com o desenvolvimento relacionado aos funcionários.
-
-|Branch|Entidade|Relacionamento|Descrição|
-|---|---|---|---|
-|funcionario|Funcionario|TipoFuncionario|criar crud básico|
+# Atualização do CRUD
+|Entidade|Create|Read|Update|Delete|
+|---|---|---|---|---|
+|Funcionário|X|X|-|-|
+|Tipo de Funcionário|X|X|X|X|
+|Habilidade|X|-|-|-|
+|Projeto|-|-|-|-|
+|Tarefa|-|-|-|-|

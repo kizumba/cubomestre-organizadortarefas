@@ -5,24 +5,35 @@
 {% endblock %}
 
 {% block content %}
-
+<h2>Novo registro</h2>
+<a href="{% url 'criar_funcionario' %}" class="btn btn-primary">Cadastrar novo funcionário</a>
 <h1>Funcionários</h1>
 <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Data de Nascimento</th>
+      <th scope="col">Sexo</th>
+      <th scope="col">CPF</th>
+      <th scope="col">Ações</th>
     </tr>
   </thead>
   <tbody>
+    {% for funcionario in object_list %}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">{{funcionario.pk}}</th>
+      <td>{{funcionario.nome}}</td>
+      <td>{{funcionario.data_nascimento}}</td>
+      <td>{{funcionario.get_sexo_display}}</td>
+      <td>{{funcionario.cpf}}</td>
+      <td>
+        <a href="{% url 'detalhes_funcionario' pk=funcionario.pk %}" class="btn btn-secondary btn-sm">Visualizar</a>
+        <a href="" class="btn btn-primary btn-sm">Editar</a>
+        <a href="" class="btn btn-danger btn-sm">Apagar</a>
+      </td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
 {% endblock %}
