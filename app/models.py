@@ -108,6 +108,7 @@ class TipoFuncionario(models.Model):
 
 class Funcionario(models.Model):
     nome = models.CharField(max_length=100, null=False, blank=False)
+    senha = models.CharField(max_length=128, null=False, blank=False)
     data_nascimento = models.DateField()
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, null=False, blank=False)
     cpf = models.CharField(max_length=11, unique=True)

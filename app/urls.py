@@ -6,6 +6,8 @@ from app.views.tipo_funcionario_views import (
     TipoFuncionarioDeleteView,
 )
 
+
+
 urlpatterns = [
     path("lista_tipo_funcionarios", TipoFuncionarioListView.as_view(), name="lista_tipo_funcionarios"),
     path("form_tipo_funcionario", TipoFuncionarioCreateView.as_view(), name="criar_tipo_funcionario"),
