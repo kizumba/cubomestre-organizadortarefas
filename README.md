@@ -1,7 +1,7 @@
 # Atualização do CRUD
 |Entidade|Create|Read|Update|Delete|
 |---|---|---|---|---|
-|Funcionário|X|X|-|-|
+|Funcionário|X|X|X|-|
 |Tipo de Funcionário|X|X|X|X|
 |Habilidade|X|-|-|-|
 |Projeto|-|-|-|-|

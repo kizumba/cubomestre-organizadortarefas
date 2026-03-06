@@ -55,16 +55,20 @@ class FuncionarioUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(FuncionarioUpdateView, self).get_context_data(**kwargs)
         context["form"] = FuncionarioForm(instance=self.object)
+        context["contato_form"] = ContatoForm(instance=self.object.contato)
         context["endereco_form"] = EnderecoForm(instance=self.object.endereco)
         return context
 
     def post(self, request, *args, **kwargs):
         funcionario = Funcionario.objects.get(id=kwargs["pk"])
         funcionario_form = FuncionarioForm(data=request.POST or None, instance=funcionario)
+        contato_form = ContatoForm(data=request.POST or None, instance=funcionario.contato)
         endereco_form = EnderecoForm(data=request.POST or None, instance=funcionario.endereco)
         if funcionario_form.is_valid() and endereco_form.is_valid():
+            contato = contato_form.save()
             endereco = endereco_form.save()
             funcionario = funcionario_form.save(commit=False)
+            funcionario.contato = contato
             funcionario.endereco = endereco
             funcionario.save()
-            return HttpResponseRedirect(reverse("lista_funcionario"))
+            return HttpResponseRedirect(reverse("lista_funcionarios"))

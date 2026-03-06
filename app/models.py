@@ -1,6 +1,5 @@
 from django.db import models
 
-
 SEXO_CHOICES = (
     ("M","Masculino"),
     ("F","Feminino"),

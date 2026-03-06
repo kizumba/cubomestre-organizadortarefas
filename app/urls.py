@@ -14,6 +14,7 @@ from app.views.funcionario_views import (
 from app.views.habilidade_views import (
     HabilidadeListView,
     HabilidadeCreateView,
+    HabilidadeUpdateView,
 )
 
 
@@ -25,8 +26,11 @@ urlpatterns = [
     # Funcionário
     path("form_funcionario", FuncionarioCreateView.as_view(),name="criar_funcionario"),
     path("lista_funcionarios", FuncionarioListView.as_view(), name="lista_funcionarios"),
+    path("detalhes_funcionario/<int:pk>", FuncionarioDetailView.as_view(), name="detalhes_funcionario"),
+    path("form_funcionario/<int:pk>", FuncionarioUpdateView.as_view(),name="atualizar_funcionario"),
+
     # Habilidade
     path("lista_habilidades", HabilidadeListView.as_view(), name="lista_habilidades"),
     path("form_habilidade", HabilidadeCreateView.as_view(),name="criar_habilidade"),
-    path("detalhes_funcionario/<int:pk>", FuncionarioDetailView.as_view(), name="detalhes_funcionario"),
+    path("form_habilidade/<int:pk>", HabilidadeUpdateView.as_view(), name="atualizar_habilidade"),
 ]

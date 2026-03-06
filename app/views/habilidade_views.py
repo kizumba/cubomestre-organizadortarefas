@@ -14,3 +14,9 @@ class HabilidadeCreateView(CreateView):
     fields = "__all__"
     template_name = "habilidades/form_habilidade.html"
     success_url = "lista_habilidades"
+
+class HabilidadeUpdateView(UpdateView):
+    model = Habilidade
+    fields = "__all__"
+    template_name = "habilidades/form_habilidade.html"
+    success_url = "lista_habilidades"
