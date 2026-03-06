@@ -1,3 +1,12 @@
+# Atualização do CRUD
+|Entidade|Create|Read|Update|Delete|
+|---|---|---|---|---|
+|Funcionário|X|X|-|-|
+|Tipo de Funcionário|X|X|X|X|
+|Habilidade|X|-|-|-|
+|Projeto|-|-|-|-|
+|Tarefa|-|-|-|-|
+
 # Cubo Mestre
 Primeiro projeto da empresa Cubo Mestre. Projeto piloto para desenvolver as habilidades pessoais e em grupo. O foco é desenvolver uma aplicação para gerenciar projetos segmentando-o em partes menores chamadas de tarefas. Cada Tarefa pode ser executada por um, e somente um, colaborador.
 
@@ -79,11 +88,3 @@ O outro comando é o `python manage.py migrate` que diz ao django para executarm
 * main
 * funcionario
 
-# Atualização do CRUD
-|Entidade|Create|Read|Update|Delete|
-|---|---|---|---|---|
-|Funcionário|X|X|-|-|
-|Tipo de Funcionário|X|X|X|X|
-|Habilidade|X|-|-|-|
-|Projeto|-|-|-|-|
-|Tarefa|-|-|-|-|

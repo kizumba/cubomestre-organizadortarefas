@@ -45,3 +45,26 @@ class FuncionarioCreateView(CreateView):
 class FuncionarioDetailView(DetailView):
     model = Funcionario
     template_name = "funcionarios/detalhes_funcionario.html"
+
+class FuncionarioUpdateView(UpdateView):
+    model = Funcionario
+    form_class = FuncionarioForm
+    template_name = "funcionarios/form_funcionario.html"
+    success_url = reverse_lazy("lista_funcionarios")
+
+    def get_context_data(self, **kwargs):
+        context = super(FuncionarioUpdateView, self).get_context_data(**kwargs)
+        context["form"] = FuncionarioForm(instance=self.object)
+        context["endereco_form"] = EnderecoForm(instance=self.object.endereco)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        funcionario = Funcionario.objects.get(id=kwargs["pk"])
+        funcionario_form = FuncionarioForm(data=request.POST or None, instance=funcionario)
+        endereco_form = EnderecoForm(data=request.POST or None, instance=funcionario.endereco)
+        if funcionario_form.is_valid() and endereco_form.is_valid():
+            endereco = endereco_form.save()
+            funcionario = funcionario_form.save(commit=False)
+            funcionario.endereco = endereco
+            funcionario.save()
+            return HttpResponseRedirect(reverse("lista_funcionario"))

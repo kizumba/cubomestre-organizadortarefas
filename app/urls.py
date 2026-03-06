@@ -9,6 +9,7 @@ from app.views.funcionario_views import (
     FuncionarioCreateView,
     FuncionarioListView,
     FuncionarioDetailView,
+    FuncionarioUpdateView,
 )
 from app.views.habilidade_views import (
     HabilidadeListView,
