@@ -115,7 +115,7 @@ class Funcionario(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True)
     modificado_em = models.DateTimeField(auto_now=True)
 
-    contato = models.ForeignKey(to=Contato, on_delete=models.CASCADE)
+    contato = models.ForeignKey(to=Contato, on_delete=models.CASCADE, related_name="funcionario")
     endereco = models.ForeignKey(to=Endereco, on_delete=models.CASCADE, related_name="funcionario")
     tipo_funcionario = models.ForeignKey(to=TipoFuncionario, on_delete=models.SET_NULL, null=True)
 

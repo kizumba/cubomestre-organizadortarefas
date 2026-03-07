@@ -3,7 +3,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
-from app.models import Funcionario
+from app.models import Funcionario, FuncionarioHabilidade
 from app.forms.funcionario_forms import (
     FuncionarioForm,
     EnderecoForm,
@@ -39,6 +39,14 @@ class FuncionarioCreateView(CreateView):
             funcionario.endereco = endereco
             funcionario.contato = contato
             funcionario.save()
+            
+            habilidades_selecionadas = request.POST.getlist('habilidades')
+            FuncionarioHabilidade.objects.filter(colaborador=funcionario).delete()
+            for habilidade_id in habilidades_selecionadas:
+                FuncionarioHabilidade.objects.create(
+                    colaborador=funcionario,
+                    habilidade_id=habilidade_id
+                )
 
         return HttpResponseRedirect(reverse("lista_funcionarios"))
 
@@ -71,4 +79,26 @@ class FuncionarioUpdateView(UpdateView):
             funcionario.contato = contato
             funcionario.endereco = endereco
             funcionario.save()
+
+            habilidades_selecionadas = request.POST.getlist('habilidades')
+            FuncionarioHabilidade.objects.filter(colaborador=funcionario).delete()
+            for habilidade_id in habilidades_selecionadas:
+                FuncionarioHabilidade.objects.create(
+                    colaborador=funcionario,
+                    habilidade_id=habilidade_id
+                )
+
+
             return HttpResponseRedirect(reverse("lista_funcionarios"))
+
+class FuncionarioDeleteView(DeleteView):
+    model = Funcionario
+    template_name = "funcionarios/apagar_funcionario.html"
+    success_url = reverse_lazy("lista_funcionarios")
+
+    def post(self, request, *args, **kwargs):
+        funcionario = Funcionario.objects.get(id=kwargs["pk"])
+        funcionario.endereco.delete()
+        funcionario.contato.delete()
+        funcionario.delete()
+        return HttpResponseRedirect(reverse("lista_funcionarios"))

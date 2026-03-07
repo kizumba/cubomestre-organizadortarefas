@@ -30,7 +30,7 @@
       <td>
         <a href="{% url 'detalhes_funcionario' pk=funcionario.pk %}" class="btn btn-secondary btn-sm">Visualizar</a>
         <a href="{% url 'atualizar_funcionario' pk=funcionario.pk %}" class="btn btn-primary btn-sm">Editar</a>
-        <a href="" class="btn btn-danger btn-sm">Apagar</a>
+        <a href="{% url 'apagar_funcionario' pk=funcionario.pk %}" class="btn btn-danger btn-sm">Apagar</a>
       </td>
     </tr>
     {% endfor %}
