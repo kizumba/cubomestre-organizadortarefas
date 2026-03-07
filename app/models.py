@@ -136,7 +136,7 @@ class Habilidade(models.Model):
     descricao = models.TextField(null=True, blank=True)
     ativa = models.BooleanField(default=True)
     criado_em = models.DateTimeField(auto_now_add=True)
-    modidicado_em = models.DateTimeField(auto_now=True)
+    modificado_em = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nome

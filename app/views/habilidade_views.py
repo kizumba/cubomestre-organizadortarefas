@@ -19,4 +19,9 @@ class HabilidadeUpdateView(UpdateView):
     model = Habilidade
     fields = "__all__"
     template_name = "habilidades/form_habilidade.html"
-    success_url = "lista_habilidades"
+    success_url = reverse_lazy("lista_habilidades")
+
+class HabilidadeDeleteView(DeleteView):
+    model = Habilidade
+    template_name = "habilidades/apagar_habilidade.html"
+    success_url = reverse_lazy("lista_habilidades")

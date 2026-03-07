@@ -29,6 +29,12 @@
 <ul>
     <li>Tipo: {{funcionario.tipo_funcionario.funcao}}</li>
 </ul>
+<h2>Habilidades</h2>
+<ul>
+    {% for habilidade in funcionario.habilidades.all %}
+    <li>{{habilidade.nome}}</li>
+    {% endfor %}
+</ul>
 <h2>Sistema</h2>
 <ul>
     <li>{{funcionario.criado_em}}</li>

@@ -12,18 +12,30 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Ativa</th>
+      <th scope="col">Criado em</th>
+      <th scope="col">Modificado em</th>
+      <th scope="col">Ações</th>
     </tr>
   </thead>
   <tbody>
+    {% for habilidade in object_list %}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">{{habilidade.pk}}</th>
+      <td>{{habilidade.nome}}</td>      
+      <td>{{habilidade.descricao}}</td>      
+      <td>{{habilidade.ativa}}</td>      
+      <td>{{habilidade.criado_em}}</td>      
+      <td>{{habilidade.modificado_em}}</td>
+      <td>
+        <!-- <a href="" class="btn btn-secondary">Visualizar</a> -->
+        <a href="{% url 'atualizar_habilidade' pk=habilidade.pk %}" class="btn btn-primary">Editar</a>
+        <a href="{% url 'apagar_habilidade' pk=habilidade.pk %}" class="btn btn-danger">Apagar</a>
+      </td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
 {% endblock %}

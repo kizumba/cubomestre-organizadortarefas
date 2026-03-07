@@ -15,6 +15,7 @@ from app.views.habilidade_views import (
     HabilidadeListView,
     HabilidadeCreateView,
     HabilidadeUpdateView,
+    HabilidadeDeleteView,
 )
 
 
@@ -33,4 +34,5 @@ urlpatterns = [
     path("lista_habilidades", HabilidadeListView.as_view(), name="lista_habilidades"),
     path("form_habilidade", HabilidadeCreateView.as_view(),name="criar_habilidade"),
     path("form_habilidade/<int:pk>", HabilidadeUpdateView.as_view(), name="atualizar_habilidade"),
+    path("apagar_habilidade/<int:pk>", HabilidadeDeleteView.as_view(), name="apagar_habilidade"),
 ]
