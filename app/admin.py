@@ -4,7 +4,6 @@ from .models import (
     Funcionario, 
     TipoFuncionario,
     Cliente,
-    TipoCliente,
     Projeto,
     Tarefa,
     Habilidade,
@@ -17,7 +16,6 @@ from .models import (
 admin.site.register(Funcionario)
 admin.site.register(TipoFuncionario)
 admin.site.register(Cliente)
-admin.site.register(TipoCliente)
 admin.site.register(Habilidade)
 admin.site.register(FuncionarioHabilidade)
 admin.site.register(Projeto)

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Clientes
+{% endblock %}
+
+{% block content %}
+<h1>Clientes</h1>
+<a href="" class="btn btn-primary">Cadastrar novo Cliente</a>
+<h2>Lista de Clientes</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <th scope="row">#</th>
+      <td>Nome</td>
+      <td>
+        <a href="{}" class="btn btn-secondary btn-sm">Visualizar</a>
+        <a href="{}" class="btn btn-primary btn-sm">Editar</a>
+        <a href="{}" class="btn btn-danger btn-sm">Apagar</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}

@@ -60,33 +60,25 @@ class Contato(models.Model):
     email = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
-        return f"{self.telefone} - {self.email}"
-    
-
-class TipoCliente(models.Model):
-    PESSOA_CHOICES = (
-        ("Jurídica", "Jurídica"),
-        ("Física", "Física"),
-    )
-    pessoa = models.CharField(max_length=8, choices=PESSOA_CHOICES, null=False, blank=False)
-    descricao = models.TextField(null=False, blank=True)
-
-    def __str__(self):
-        return self.pessoa
-    
+        return f"{self.telefone} - {self.email}" 
 
 class Cliente(models.Model):
-    nome = models.CharField(max_length=100, null=False, blank=False)
     DOCUMENTO_CHOICES = (
         ("CPF", "CPF"),
         ("CNPJ","CNPJ"),
     )
+    PESSOA_CHOICES = (
+        ("Jurídica", "Jurídica"),
+        ("Física", "Física"),
+    )
+    
+    nome = models.CharField(max_length=100, null=False, blank=False)
     tipo_documento = models.CharField(max_length=4, choices=DOCUMENTO_CHOICES, null=False, blank=False, unique=True)
+    tipo_pessoa = models.CharField(max_length=8, choices=PESSOA_CHOICES, null=False, blank=False)
     documento = models.CharField(max_length=14, null=False, blank=False, unique=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     modificado_em = models.DateTimeField(auto_now=True)
 
-    tipo_cliente = models.ForeignKey(to=TipoCliente, on_delete=models.CASCADE, null=True)
     contato = models.ForeignKey(to=Contato, on_delete=models.CASCADE)
     endereco = models.ForeignKey(to=Endereco, on_delete=models.CASCADE, related_name="cliente")
 
@@ -112,6 +104,7 @@ class Funcionario(models.Model):
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, null=False, blank=False)
     cpf = models.CharField(max_length=11, unique=True)
     salario = models.DecimalField(max_digits=10,decimal_places=2)
+    is_ativo = models.BooleanField(default=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     modificado_em = models.DateTimeField(auto_now=True)
 
