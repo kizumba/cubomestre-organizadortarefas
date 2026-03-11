@@ -18,7 +18,13 @@ from app.views.habilidade_views import (
     HabilidadeUpdateView,
     HabilidadeDeleteView,
 )
-
+from app.views.cliente_views import (
+    ClienteListView,
+    ClienteCreateView,
+    ClienteDetailView,
+    ClienteUpdateView,
+    ClienteDeleteView,
+)
 
 urlpatterns = [
     # Tipo de funcionário
@@ -39,4 +45,11 @@ urlpatterns = [
     path("form_habilidade", HabilidadeCreateView.as_view(),name="criar_habilidade"),
     path("form_habilidade/<int:pk>", HabilidadeUpdateView.as_view(), name="atualizar_habilidade"),
     path("apagar_habilidade/<int:pk>", HabilidadeDeleteView.as_view(), name="apagar_habilidade"),
+
+    # Clientes
+    path("lista_clientes", ClienteListView.as_view(), name="lista_clientes"),
+    path("form_cliente", ClienteCreateView.as_view(), name="criar_cliente"),
+    path("detalhes_cliente/<int:pk>", ClienteDetailView.as_view(), name="detalhes_cliente"),
+    path("form_cliente/<int:pk>", ClienteUpdateView.as_view(),name="atualizar_cliente"),
+    path("apagar_cliente/<int:pk>", ClienteDeleteView.as_view(), name="apagar_cliente"),
 ]

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    Funcionários
+{% endblock %}
+
+{% block content %}
+<h1>Cliente #{{cliente.pk}} - {{cliente.nome}}</h1>
+<h2>Dados pessoais</h2>
+<ul>
+    <li>Nome: {{cliente.nome}}</li>
+    <li>Tipo documento: {{cliente.tipo_documento}}</li>
+    <li>Nº documento: {{cliente.documento}}</li>
+    <li>Tipo pessoa: {{cliente.tipo_pessoa}}</li>
+</ul>
+<h2>Endereço</h2>
+<p>Rua {{cliente.endereco.logradouro}}, {{cliente.endereco.numero}}, 
+    {{cliente.endereco.bairro}}, {{cliente.endereco.cidade}} - {{cliente.endereco.uf}}. CEP: {{cliente.endereco.cep}}</p>
+<h2>Contato</h2>
+<ul>
+    <li>E-mail: {{cliente.contato.email}}</li>
+    <li>Telefone: {{cliente.contato.telefone}}</li>
+</ul>
+<h2>Sistema</h2>
+<ul>
+    <li>{{cliente.criado_em}}</li>
+    <li>{{cliente.modificado_em}}</li>
+</ul>
+<hr>
+<a href="{% url 'lista_clientes' %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}

@@ -5,9 +5,6 @@
 {% endblock %}
 
 {% block content %}
-<h2>Novo registro</h2>
-<a href="{% url 'criar_funcionario' %}" class="btn btn-primary">Cadastrar novo funcionário</a>
-<a href="{% url 'lista_funcionarios' %}" class="btn btn-secondary">Voltar</a>
 <h1>Funcionário #{{funcionario.pk}} - {{funcionario.nome}}</h1>
 <h2>Dados pessoais</h2>
 <ul>
@@ -40,4 +37,6 @@
     <li>{{funcionario.criado_em}}</li>
     <li>{{funcionario.modificado_em}}</li>
 </ul>
+<hr>
+<a href="{% url 'lista_funcionarios' %}" class="btn btn-secondary">Voltar</a>
 {% endblock %}

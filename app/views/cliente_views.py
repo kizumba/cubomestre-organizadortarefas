@@ -1,0 +1,87 @@
+from django.shortcuts import render
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
+
+from app.models import Cliente
+from app.forms.cliente_forms import (
+    ClienteForm,
+    EnderecoForm,
+    ContatoForm,
+)
+
+class ClienteListView(ListView):
+    model = Cliente
+    fields = "__all__"
+    template_name = "clientes/lista_clientes.html"
+
+class ClienteCreateView(CreateView):
+    model = Cliente
+    form_class = ClienteForm
+    template_name = "clientes/form_cliente.html"
+    success_url = "lista_clientes"
+
+    def get_context_data(self, **kwargs):
+        context = super(ClienteCreateView, self).get_context_data(**kwargs)
+        context['form'] = ClienteForm()
+        context["endereco_form"] = EnderecoForm()
+        context["contato_form"] = ContatoForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        cliente_form = ClienteForm(data=request.POST)
+        endereco_form = EnderecoForm(data=request.POST)
+        contato_form = ContatoForm(data=request.POST)
+        if cliente_form.is_valid() and endereco_form.is_valid() and contato_form.is_valid():
+            endereco = endereco_form.save()
+            contato = contato_form.save()
+            cliente = cliente_form.save(commit=False)
+            cliente.endereco = endereco
+            cliente.contato = contato
+            cliente.save()
+
+        return HttpResponseRedirect(reverse("lista_clientes"))
+
+class ClienteDetailView(DetailView):
+    model = Cliente
+    template_name = "clientes/detalhes_cliente.html"
+
+class ClienteUpdateView(UpdateView):
+    model = Cliente
+    form_class = ClienteForm
+    template_name = "clientes/form_cliente.html"
+    success_url = reverse_lazy("lista_clientes")
+
+    def get_context_data(self, **kwargs):
+        context = super(ClienteUpdateView, self).get_context_data(**kwargs)
+        context["form"] = ClienteForm(instance=self.object)
+        context["contato_form"] = ContatoForm(instance=self.object.contato)
+        context["endereco_form"] = EnderecoForm(instance=self.object.endereco)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        cliente = Cliente.objects.get(id=kwargs["pk"])
+        cliente_form = ClienteForm(data=request.POST or None, instance=cliente)
+        contato_form = ContatoForm(data=request.POST or None, instance=cliente.contato)
+        endereco_form = EnderecoForm(data=request.POST or None, instance=cliente.endereco)
+        if cliente_form.is_valid() and endereco_form.is_valid():
+            contato = contato_form.save()
+            endereco = endereco_form.save()
+            cliente = cliente_form.save(commit=False)
+            cliente.contato = contato
+            cliente.endereco = endereco
+            cliente.save()
+
+            return HttpResponseRedirect(reverse("lista_clientes"))
+
+class ClienteDeleteView(DeleteView):
+    model = Cliente
+    template_name = "clientes/apagar_cliente.html"
+    success_url = reverse_lazy("lista_clientes")
+
+    def post(self, request, *args, **kwargs):
+        cliente = Cliente.objects.get(id=kwargs["pk"])
+        cliente.endereco.delete()
+        cliente.contato.delete()
+        cliente.delete()
+        return HttpResponseRedirect(reverse("lista_clientes"))

@@ -3,6 +3,7 @@
 |---|---|---|---|---|
 |Funcionário|X|X|X|X|
 |Tipo de Funcionário|X|X|X|X|
+|Cliente|X|X|X|X|
 |Habilidade|X|X|X|X|
 |Projeto|-|-|-|-|
 |Tarefa|-|-|-|-|
