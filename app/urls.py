@@ -29,6 +29,7 @@ from app.views.projeto_views import (
     ProjetoListView,
     ProjetoCreateView,
 )
+from app.views.autenticacao_views import login, logout
 
 urlpatterns = [
     # Tipo de funcionário
@@ -60,4 +61,8 @@ urlpatterns = [
     # Projetos
     path("lista_projetos", ProjetoListView.as_view(), name="lista_projetos"),
     path("form_projeto", ProjetoCreateView.as_view(), name="criar_projeto"),
+
+    # Login
+    path("login", login, name="login"),
+    path("logout",logout, name="logout"),
 ]
