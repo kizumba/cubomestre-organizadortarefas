@@ -25,6 +25,10 @@ from app.views.cliente_views import (
     ClienteUpdateView,
     ClienteDeleteView,
 )
+from app.views.projeto_views import (
+    ProjetoListView,
+    ProjetoCreateView,
+)
 
 urlpatterns = [
     # Tipo de funcionário
@@ -52,4 +56,8 @@ urlpatterns = [
     path("detalhes_cliente/<int:pk>", ClienteDetailView.as_view(), name="detalhes_cliente"),
     path("form_cliente/<int:pk>", ClienteUpdateView.as_view(),name="atualizar_cliente"),
     path("apagar_cliente/<int:pk>", ClienteDeleteView.as_view(), name="apagar_cliente"),
+
+    # Projetos
+    path("lista_projetos", ProjetoListView.as_view(), name="lista_projetos"),
+    path("form_projeto", ProjetoCreateView.as_view(), name="criar_projeto"),
 ]

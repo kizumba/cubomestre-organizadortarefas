@@ -89,3 +89,7 @@ O outro comando é o `python manage.py migrate` que diz ao django para executarm
 * main
 * funcionario
 
+# Regras de Negócio
+## Projeto e Tarefas
+1. Somente usuário do tipo gerente pode criar projeto
+1. As tarefas criadas em um projeto não pode aparecer em outro

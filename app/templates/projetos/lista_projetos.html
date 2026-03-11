@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+Projetos
+{% endblock %}
+
+{% block content %}
+<h1>Projetos</h1>
+<a href="{% url 'criar_projeto' %}" class="btn btn-primary">Cadastrar novo projeto</a>
+<h2>Lista de projetos</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Status</th>
+      <th scope="col">Custo</th>
+      <th scope="col">Data prevista</th>
+      <th scope="col">Data entrega</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Gerente</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for projeto in object_list %}
+    <tr>
+      <th scope="row">{{projeto.pk}}</th>
+      <td>{{projeto.nome}}</td>      
+      <td>{{projeto.descricao}}</td>  
+      <td>{{projeto.get_status_display}}</td>        
+      <td>{{projeto.custo}}</td>      
+      <td>{{projeto.data_entrega_prevista}}</td>
+      <td>{{projeto.data_entrega_real}}</td>
+      <td>{{projeto.cliente.nome}}</td>
+      <td>{{projeto.gerente.nome}}</td>
+      <td>
+        <a href="" class="btn btn-secondary">Visualizar</a>
+        <a href="" class="btn btn-primary">Editar</a>
+        <a href="" class="btn btn-danger">Apagar</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
