@@ -35,7 +35,11 @@ from app.views.tarefa_views import(
     TarefaDeleteView,
 )
 
-from app.views.autenticacao_views import login, logout
+from app.views.autenticacao_views import (
+    LoginView,
+    LogoutView,
+    AlterarSenhaView,
+)
 
 urlpatterns = [   
     # Funcionário
@@ -73,6 +77,7 @@ urlpatterns = [
     path("apagar_tarefa/<int:pk>", TarefaDeleteView.as_view(), name="apagar_tarefa"),
 
     # Login
-    path("login", login, name="login"),
-    path("logout",logout, name="logout"),
+    path("login", LoginView.as_view(), name="login"),
+    path("logout", LogoutView.as_view(), name="logout"),
+    path("alterar_senha", AlterarSenhaView.as_view(), name="alterar_senha"),
 ]

@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
+
 
 {% block page_title %}
 Login
@@ -6,13 +8,16 @@ Login
 
 {% block content %}
 
-<div class="text-center container-fluid">
-  <h1>Login</h1>
-  <label for="" class="label-control">E-mail</label>
-  <input type="email" name="" id="" class="form-control w-25 mx-auto">
+<div class="container">
+  {% if error %}
+  <span style="color: red">{{error}}</span>
+  {% endif %}
   <br>
-  <label for="" class="label-control">Senha</label>
-  <input type="password" name="" id="" class="form-control w-25 mx-auto">
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" class="btn btn-primary" value="Entrar">
+  </form>  
 </div>
 
 {% endblock %}

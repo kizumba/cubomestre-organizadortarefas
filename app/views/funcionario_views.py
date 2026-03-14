@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from app.models import Funcionario, FuncionarioHabilidade, Habilidade
 from app.forms.funcionario_forms import (
@@ -10,16 +11,19 @@ from app.forms.funcionario_forms import (
     FuncionarioChangeForm
 )
 
-class FuncionarioListView(ListView):
+class FuncionarioListView(LoginRequiredMixin, ListView):
     model = Funcionario
     fields = "__all__"
     template_name = "funcionarios/lista_funcionarios.html"
 
-class FuncionarioCreateView(CreateView):
+class FuncionarioCreateView(UserPassesTestMixin, CreateView):
     model = Funcionario
     form_class = FuncionarioForm
     template_name = "funcionarios/form_funcionario.html"
     success_url = "lista_funcionarios"
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
     def get_context_data(self, **kwargs):
         context = super(FuncionarioCreateView, self).get_context_data(**kwargs)
@@ -48,11 +52,11 @@ class FuncionarioCreateView(CreateView):
 
         return HttpResponseRedirect(reverse("lista_funcionarios"))
 
-class FuncionarioDetailView(DetailView):
+class FuncionarioDetailView(LoginRequiredMixin, DetailView):
     model = Funcionario
     template_name = "funcionarios/detalhes_funcionario.html"
 
-class FuncionarioUpdateView(UpdateView):
+class FuncionarioUpdateView(LoginRequiredMixin, UpdateView):
     model = Funcionario
     form_class = FuncionarioChangeForm
     template_name = "funcionarios/form_funcionario.html"
@@ -91,7 +95,7 @@ class FuncionarioUpdateView(UpdateView):
             context["endereco_form"] = endereco_form
             return self.render_to_response(context)
 
-class FuncionarioDeleteView(DeleteView):
+class FuncionarioDeleteView(LoginRequiredMixin, DeleteView):
     model = Funcionario
     template_name = "funcionarios/apagar_funcionario.html"
     success_url = reverse_lazy("lista_funcionarios")

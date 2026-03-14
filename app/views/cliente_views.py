@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from app.models import Cliente
 from app.forms.cliente_forms import (
@@ -9,12 +10,12 @@ from app.forms.cliente_forms import (
     EnderecoForm,
 )
 
-class ClienteListView(ListView):
+class ClienteListView(LoginRequiredMixin, ListView):
     model = Cliente
     fields = "__all__"
     template_name = "clientes/lista_clientes.html"
 
-class ClienteCreateView(CreateView):
+class ClienteCreateView(LoginRequiredMixin, CreateView):
     model = Cliente
     form_class = ClienteForm
     template_name = "clientes/form_cliente.html"
@@ -37,11 +38,11 @@ class ClienteCreateView(CreateView):
 
         return HttpResponseRedirect(reverse("lista_clientes"))
 
-class ClienteDetailView(DetailView):
+class ClienteDetailView(LoginRequiredMixin, DetailView):
     model = Cliente
     template_name = "clientes/detalhes_cliente.html"
 
-class ClienteUpdateView(UpdateView):
+class ClienteUpdateView(LoginRequiredMixin, UpdateView):
     model = Cliente
     form_class = ClienteForm
     template_name = "clientes/form_cliente.html"
@@ -65,7 +66,7 @@ class ClienteUpdateView(UpdateView):
 
             return HttpResponseRedirect(reverse("lista_clientes"))
 
-class ClienteDeleteView(DeleteView):
+class ClienteDeleteView(LoginRequiredMixin, DeleteView):
     model = Cliente
     template_name = "clientes/apagar_cliente.html"
     success_url = reverse_lazy("lista_clientes")

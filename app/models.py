@@ -105,7 +105,7 @@ class Funcionario(AbstractUser):
     )
 
     def __str__(self):
-        return f"RA: {self.pk}, Nome: {self.username}, Cargo: {self.get_cargo_display()}"
+        return f"{self.username}-{self.get_cargo_display()}"
     
 class Habilidade(models.Model):
     nome = models.CharField(max_length=100, null=False, blank=False, unique=True)
@@ -120,7 +120,7 @@ class Habilidade(models.Model):
 
 class FuncionarioHabilidade(models.Model):
     colaborador = models.ForeignKey(to=Funcionario,on_delete=models.CASCADE, null=True)
-    habilidade = models.ForeignKey(to=Habilidade, on_delete=models.CASCADE ,null=True)
+    habilidade = models.ForeignKey(to=Habilidade, on_delete=models.CASCADE ,null=True, blank=True)
 
     class Meta:
         unique_together = ["colaborador", "habilidade"]

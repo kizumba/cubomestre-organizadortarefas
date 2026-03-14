@@ -6,7 +6,7 @@ from app.models import Funcionario, Endereco
 class FuncionarioForm(UserCreationForm):
     class Meta:
         model = Funcionario
-        exclude = ("password","endereco","groups","user_permissions","is_superuser","last_login","data_joined")
+        exclude = ("password","endereco","groups","user_permissions","last_login","data_joined")
     
 class FuncionarioChangeForm(UserChangeForm):
     password = None

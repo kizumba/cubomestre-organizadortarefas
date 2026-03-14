@@ -8,12 +8,20 @@
 <h1>Projeto #{{projeto.pk}} - Nome: {{projeto.nome}}</h1>
 <h2>Dados do projeto</h2>
 <ul>
-    <li>Status: {{projeto.status}}</li>
+    <li>Status: {{projeto.get_status_display}}</li>
     <li>Ativo: {{projeto.is_ativo}}</li>
     <li>Descrição: {{projeto.descricao}}</li>
     <li>Custo: R${{projeto.custo}}</li>
-    <li>Data prevista para entrega: {{projeto.data_entrega_prevista}}</li>
-    <li>Data real da entrega: {{projeto.data_entrega_real}}</li>
+    <li>Data prevista para entrega: 
+        {{projeto.data_entrega_prevista}}
+    </li>
+    <li>Data real da entrega: 
+        {% if projeto.data_entrega_real %}
+        {{projeto.data_entrega_real}}
+        {% else %}
+        -
+        {% endif %}
+    </li>
 </ul>
 <h2>Atores</h2>
 <ul>

@@ -1,17 +1,19 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from app.models import Projeto, Funcionario
 
 from app.forms.projeto_forms import ProjetoForm
 
-class ProjetoListView(ListView):
+class ProjetoListView(LoginRequiredMixin, ListView):
     model = Projeto
     fields = "__all__"
     template_name = "projetos/lista_projetos.html"
 
-class ProjetoCreateView(CreateView):
+class ProjetoCreateView(LoginRequiredMixin, CreateView):
     model = Projeto
     # fields = ("nome", "status","descricao","custo", "data_entrega_prevista", "data_entrega_real", "cliente","gerente",)
     form_class = ProjetoForm
@@ -48,18 +50,18 @@ class ProjetoCreateView(CreateView):
             form.instance.gerente_id = gerente_pk
         return super().form_valid(form)
 
-class ProjetoUpdateView(UpdateView):
+class ProjetoUpdateView(LoginRequiredMixin, UpdateView):
     model = Projeto
     # fields = "__all__"
     form_class = ProjetoForm
     template_name = "projetos/form_projeto.html"
     success_url = reverse_lazy("lista_projetos")
 
-class ProjetoDetailView(DetailView):
+class ProjetoDetailView(LoginRequiredMixin, DetailView):
     model = Projeto
     template_name = "projetos/detalhes_projeto.html"
 
-class ProjetoDeleteView(DeleteView):
+class ProjetoDeleteView(LoginRequiredMixin, DeleteView):
     model = Projeto
     template_name = "projetos/apagar_projeto.html"
     success_url = reverse_lazy("lista_projetos")

@@ -10,6 +10,15 @@
 |Projeto|X|X|X|X|
 |Tarefa|X|X|X|X|
 
+## Autenticação e Autorização
+### Login
+- [x] Criar página de login
+- [x] Criar view login
+- [x] Limitar acesso pelo cargo do usuário
+
+### Logout
+- [x] Criar função de deslogar o usuário
+
 ## Área do Gerente
 - [ ] Página para gerenciar seus próprios projetos. O gerente só pode ver os projetos que criou.
 - [ ] Página para criar tarefas do projeto
