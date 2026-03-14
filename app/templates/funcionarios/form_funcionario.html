@@ -10,13 +10,7 @@ Funcionários
 <h1>Cadastro de Funcionário</h1>
 <form method="post">
     {% csrf_token %}
-    <h2>Dados pessoais</h2>
     {% bootstrap_form form %}
-    <hr>
-    <h2>Contato</h2>
-    {% bootstrap_form contato_form %}
-    <hr>
-    <h2>Endereço</h2>
     {% bootstrap_form endereco_form %}
     <input type="submit" value="Salvar" class="btn btn-primary">
     <a href="{% url 'lista_funcionarios' %}" class="btn btn-secondary">Voltar</a>

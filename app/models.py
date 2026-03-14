@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 SEXO_CHOICES = (
     ("M","Masculino"),
@@ -55,63 +56,47 @@ class Endereco(models.Model):
         return f"{self.logradouro}, {self.numero}, {self.bairro}, {self.cidade}"
     
 
-class Contato(models.Model):
-    telefone = models.CharField(max_length=20, unique=True)
-    email = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return f"{self.telefone} - {self.email}" 
-
 class Cliente(models.Model):
     DOCUMENTO_CHOICES = (
         ("CPF", "CPF"),
         ("CNPJ","CNPJ"),
     )
     PESSOA_CHOICES = (
-        ("Jurídica", "Jurídica"),
         ("Física", "Física"),
+        ("Jurídica", "Jurídica"),
     )
     
     nome = models.CharField(max_length=100, null=False, blank=False)
     tipo_documento = models.CharField(max_length=4, choices=DOCUMENTO_CHOICES, null=False, blank=False, unique=True)
     tipo_pessoa = models.CharField(max_length=8, choices=PESSOA_CHOICES, null=False, blank=False)
-    documento = models.CharField(max_length=14, null=False, blank=False, unique=True)
+    numero_documento = models.CharField(max_length=14, null=False, blank=False, unique=True)
+    email = models.EmailField()
+    telefone = models.CharField(max_length=20)
     criado_em = models.DateTimeField(auto_now_add=True)
     modificado_em = models.DateTimeField(auto_now=True)
 
-    contato = models.ForeignKey(to=Contato, on_delete=models.CASCADE)
     endereco = models.ForeignKey(to=Endereco, on_delete=models.CASCADE, related_name="cliente")
 
     def __str__(self):
-        return f"{self.nome} - {self.tipo_documento}: {self.documento}"
+        return f"{self.nome} - {self.tipo_documento}: {self.numero_documento}"
     
-class TipoFuncionario(models.Model):
-    FUNCAO_CHOICES = (
-        ("Administrador", "Administrador"),
-        ("Gerente", "Gerente"),
-        ("Colaborador", "Colaborador"),
+class Funcionario(AbstractUser):
+    CARGO_CHOICES = (
+        (1, "Administrador"),
+        (2, "Gerente"),
+        (3, "Colaborador")
     )
-    funcao = models.CharField(max_length=13, choices=FUNCAO_CHOICES, null=False, blank=False, unique=True)
-    descricao = models.TextField(null=True, blank=True)
-
-    def __str__(self):
-        return self.funcao
-
-class Funcionario(models.Model):
-    nome = models.CharField(max_length=100, null=False, blank=False)
-    senha = models.CharField(max_length=128, null=False, blank=False)
     data_nascimento = models.DateField()
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, null=False, blank=False)
     cpf = models.CharField(max_length=11, unique=True)
     salario = models.DecimalField(max_digits=10,decimal_places=2)
-    is_ativo = models.BooleanField(default=True)
+    cargo = models.IntegerField(choices=CARGO_CHOICES)
+    data_contratacao = models.DateField(auto_now_add=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     modificado_em = models.DateTimeField(auto_now=True)
-
-    contato = models.ForeignKey(to=Contato, on_delete=models.CASCADE, related_name="funcionario")
+    telefone = models.CharField(max_length=20)
     endereco = models.ForeignKey(to=Endereco, on_delete=models.CASCADE, related_name="funcionario")
-    tipo_funcionario = models.ForeignKey(to=TipoFuncionario, on_delete=models.SET_NULL, null=True)
-
+    
     habilidades = models.ManyToManyField(
         "Habilidade",
         through="FuncionarioHabilidade",
@@ -119,10 +104,8 @@ class Funcionario(models.Model):
         related_name="funcionarios"
     )
 
-    
-
     def __str__(self):
-        return f"RA: {self.pk}, Nome: {self.nome}, Cargo: {self.tipo_funcionario}"
+        return f"RA: {self.pk}, Nome: {self.username}, Cargo: {self.get_cargo_display()}"
     
 class Habilidade(models.Model):
     nome = models.CharField(max_length=100, null=False, blank=False, unique=True)
@@ -147,14 +130,15 @@ class FuncionarioHabilidade(models.Model):
     
     
 class Projeto(models.Model):
-    status = models.IntegerField(choices=STATUS_CHOICES, default=0)
     nome = models.CharField(max_length=100, null=False, blank=False)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=0)
     descricao = models.TextField(null=False, blank=False)
     custo = models.DecimalField(max_digits=10, decimal_places=2)
     data_entrega_prevista = models.DateField(null=True, blank=True)
     data_entrega_real = models.DateField(null=True, blank=True)
+    is_ativo = models.BooleanField(default=True)
     criado_em = models.DateTimeField(auto_now_add=True)
-    modidicado_em = models.DateTimeField(auto_now=True)
+    modificado_em = models.DateTimeField(auto_now=True)
 
     cliente = models.ForeignKey(to=Cliente, on_delete=models.SET_NULL, related_name="projetos", null=True)
     gerente = models.ForeignKey(to=Funcionario, on_delete=models.SET_NULL, related_name="projetos_gerenciados", null=True)
@@ -177,5 +161,5 @@ class Tarefa(models.Model):
     habilidade = models.ForeignKey(to=Habilidade, on_delete=models.CASCADE, related_name="tarefas")
 
     def __str__(self):
-        return f"{self.nome} - {self.ativa} - {self.get_status_display()}. Responsável: {self.colaborador.nome}"
+        return f"{self.nome} - {self.ativa} - {self.get_status_display()}. Responsável: {self.colaborador.username}"
     

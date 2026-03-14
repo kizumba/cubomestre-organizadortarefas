@@ -5,26 +5,22 @@
 {% endblock %}
 
 {% block content %}
-<h1>Funcionário #{{funcionario.pk}} - {{funcionario.nome}}</h1>
+<h1>Funcionário #{{funcionario.pk}} - {{funcionario.username}}</h1>
 <h2>Dados pessoais</h2>
 <ul>
-    <li>Nome: {{funcionario.nome}}</li>
+    <li>Nome: {{funcionario.first_name}} {{funcionario.last_name}}</li>
     <li>Sexo: {{funcionario.sexo}}</li>
     <li>Data de Nascimento: {{funcionario.data_nascimento}}</li>
     <li>CPF: {{funcionario.cpf}}</li>
-    <li>Salário: {{funcionario.salario}}</li>
+    <li>Salário: R${{funcionario.salario}}</li>
+    <li>Telefone: {{funcionario.telefone}}</li>
 </ul>
 <h2>Endereço</h2>
 <p>Rua {{funcionario.endereco.logradouro}}, {{funcionario.endereco.numero}}, 
     {{funcionario.endereco.bairro}}, {{funcionario.endereco.cidade}} - {{funcionario.endereco.uf}}. CEP: {{funcionario.endereco.cep}}</p>
-<h2>Contato</h2>
+<h2>Cargo</h2>
 <ul>
-    <li>E-mail: {{funcionario.contato.email}}</li>
-    <li>Telefone: {{funcionario.contato.telefone}}</li>
-</ul>
-<h2>Função</h2>
-<ul>
-    <li>Tipo: {{funcionario.tipo_funcionario.funcao}}</li>
+    <li>{{funcionario.get_cargo_display}}</li>
 </ul>
 <h2>Habilidades</h2>
 <ul>

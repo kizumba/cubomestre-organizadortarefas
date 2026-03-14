@@ -7,7 +7,6 @@ from app.models import Cliente
 from app.forms.cliente_forms import (
     ClienteForm,
     EnderecoForm,
-    ContatoForm,
 )
 
 class ClienteListView(ListView):
@@ -25,19 +24,15 @@ class ClienteCreateView(CreateView):
         context = super(ClienteCreateView, self).get_context_data(**kwargs)
         context['form'] = ClienteForm()
         context["endereco_form"] = EnderecoForm()
-        context["contato_form"] = ContatoForm()
         return context
 
     def post(self, request, *args, **kwargs):
         cliente_form = ClienteForm(data=request.POST)
         endereco_form = EnderecoForm(data=request.POST)
-        contato_form = ContatoForm(data=request.POST)
-        if cliente_form.is_valid() and endereco_form.is_valid() and contato_form.is_valid():
+        if cliente_form.is_valid() and endereco_form.is_valid():
             endereco = endereco_form.save()
-            contato = contato_form.save()
             cliente = cliente_form.save(commit=False)
             cliente.endereco = endereco
-            cliente.contato = contato
             cliente.save()
 
         return HttpResponseRedirect(reverse("lista_clientes"))
@@ -55,20 +50,16 @@ class ClienteUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ClienteUpdateView, self).get_context_data(**kwargs)
         context["form"] = ClienteForm(instance=self.object)
-        context["contato_form"] = ContatoForm(instance=self.object.contato)
         context["endereco_form"] = EnderecoForm(instance=self.object.endereco)
         return context
 
     def post(self, request, *args, **kwargs):
         cliente = Cliente.objects.get(id=kwargs["pk"])
         cliente_form = ClienteForm(data=request.POST or None, instance=cliente)
-        contato_form = ContatoForm(data=request.POST or None, instance=cliente.contato)
         endereco_form = EnderecoForm(data=request.POST or None, instance=cliente.endereco)
         if cliente_form.is_valid() and endereco_form.is_valid():
-            contato = contato_form.save()
             endereco = endereco_form.save()
             cliente = cliente_form.save(commit=False)
-            cliente.contato = contato
             cliente.endereco = endereco
             cliente.save()
 
@@ -82,6 +73,5 @@ class ClienteDeleteView(DeleteView):
     def post(self, request, *args, **kwargs):
         cliente = Cliente.objects.get(id=kwargs["pk"])
         cliente.endereco.delete()
-        cliente.contato.delete()
         cliente.delete()
         return HttpResponseRedirect(reverse("lista_clientes"))

@@ -2,17 +2,17 @@
 {% load bootstrap4 %}
 
 {% block page_title %}
-Tipos de Funcionários
+Projeto
 {% endblock %}
 
 {% block content %}
 
-<h1>Excluir Tipo de Funcionário</h1>
-<p>Você deseja realmente exlcuir o tipo de funcionário <b>{{object.funcao}}?</b></p>
+<h1>Apagar Projeto</h1>
+<p>Você deseja realmente apagar o projeto <b>{{projeto.nome}}</b>?</p>
 <form method="post">
     {% csrf_token %}
     <input type="submit" value="Apagar" class="btn btn-danger">
-    <a href="{% url 'lista_tipo_funcionarios' %}" class="btn btn-secondary">Voltar</a>
+    <a href="{% url 'lista_projetos' %}" class="btn btn-secondary">Voltar</a>
 </form>
 
 {% endblock %}

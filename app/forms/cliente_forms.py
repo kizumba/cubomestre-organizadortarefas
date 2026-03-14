@@ -1,17 +1,12 @@
 from django.forms import ModelForm
-from app.models import Cliente, Endereco, Contato
+from app.models import Cliente, Endereco
 
 class ClienteForm(ModelForm):
     class Meta:
         model = Cliente
-        exclude = ("contato", "endereco",)
+        exclude = ("endereco",)
 
 class EnderecoForm(ModelForm):
     class Meta:
         model = Endereco
-        fields = "__all__"
-
-class ContatoForm(ModelForm):
-    class Meta:
-        model = Contato
         fields = "__all__"

@@ -1,10 +1,5 @@
 from django.urls import path
-from app.views.tipo_funcionario_views import (
-    TipoFuncionarioListView,
-    TipoFuncionarioCreateView,
-    TipoFuncionarioUpdateView,
-    TipoFuncionarioDeleteView,
-)
+
 from app.views.funcionario_views import (
     FuncionarioCreateView,
     FuncionarioListView,
@@ -28,16 +23,13 @@ from app.views.cliente_views import (
 from app.views.projeto_views import (
     ProjetoListView,
     ProjetoCreateView,
+    ProjetoUpdateView,
+    ProjetoDetailView,
+    ProjetoDeleteView,
 )
 from app.views.autenticacao_views import login, logout
 
-urlpatterns = [
-    # Tipo de funcionário
-    path("lista_tipo_funcionarios", TipoFuncionarioListView.as_view(), name="lista_tipo_funcionarios"),
-    path("form_tipo_funcionario", TipoFuncionarioCreateView.as_view(), name="criar_tipo_funcionario"),
-    path("form_tipo_funcionario/<int:pk>", TipoFuncionarioUpdateView.as_view(), name="atualizar_tipo_funcionario"),
-    path("apagar_tipo_funcionario/<int:pk>", TipoFuncionarioDeleteView.as_view(), name="apagar_tipo_funcionario"),
-
+urlpatterns = [   
     # Funcionário
     path("form_funcionario", FuncionarioCreateView.as_view(),name="criar_funcionario"),
     path("lista_funcionarios", FuncionarioListView.as_view(), name="lista_funcionarios"),
@@ -60,7 +52,10 @@ urlpatterns = [
 
     # Projetos
     path("lista_projetos", ProjetoListView.as_view(), name="lista_projetos"),
-    path("form_projeto", ProjetoCreateView.as_view(), name="criar_projeto"),
+    path("form_projeto>", ProjetoCreateView.as_view(), name="criar_projeto"),
+    path("form_projeto/<int:pk>", ProjetoUpdateView.as_view(), name="atualizar_projeto"),
+    path("detalhes_projeto/<int:pk>", ProjetoDetailView.as_view(), name="detalhes_projeto"),
+    path("apagar_projeto/<int:pk>", ProjetoDeleteView.as_view(), name="apagar_projeto"),
 
     # Login
     path("login", login, name="login"),
