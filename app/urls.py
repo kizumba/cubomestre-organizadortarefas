@@ -27,6 +27,14 @@ from app.views.projeto_views import (
     ProjetoDetailView,
     ProjetoDeleteView,
 )
+from app.views.tarefa_views import(
+    TarefaListView,
+    TarefaCreateView,
+    TarefaUpdateView,
+    TarefaDetailView,
+    TarefaDeleteView,
+)
+
 from app.views.autenticacao_views import login, logout
 
 urlpatterns = [   
@@ -56,6 +64,13 @@ urlpatterns = [
     path("form_projeto/<int:pk>", ProjetoUpdateView.as_view(), name="atualizar_projeto"),
     path("detalhes_projeto/<int:pk>", ProjetoDetailView.as_view(), name="detalhes_projeto"),
     path("apagar_projeto/<int:pk>", ProjetoDeleteView.as_view(), name="apagar_projeto"),
+
+    #
+    path("lista_tarefas", TarefaListView.as_view(), name="lista_tarefas"),
+    path("form_tarefa>", TarefaCreateView.as_view(), name="criar_tarefa"),
+    path("form_tarefa/<int:pk>", TarefaUpdateView.as_view(), name="atualizar_tarefa"),
+    path("detalhes_tarefa/<int:pk>", TarefaDetailView.as_view(), name="detalhes_tarefa"),
+    path("apagar_tarefa/<int:pk>", TarefaDeleteView.as_view(), name="apagar_tarefa"),
 
     # Login
     path("login", login, name="login"),

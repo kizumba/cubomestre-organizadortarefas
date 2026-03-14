@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+Tarefas
+{% endblock %}
+
+{% block content %}
+<h1>Tarefa #{{tarefa.pk}} - Nome: {{tarefa.nome}}</h1>
+<h2>Dados da tarefa</h2>
+<ul>
+    <li>Status: {{tarefa.get_status_display}}</li>
+    <li>Ativo: {{tarefa.ativa}}</li>
+    <li>Descrição: {{tarefa.descricao}}</li>
+    <li>Data prevista para entrega: {{tarefa.data_entrega_prevista}}</li>
+    <li>Data real da entrega: {{tarefa.data_entrega_real}}</li>
+    <li>Habilidade: {{tarefa.habilidade.nome}}</li>
+    <li>Colaborador: {{tarefa.colaborador.username}}</li>
+</ul>
+<h2>Dados do Sistema</h2>
+<ul>
+    <li>{{tarefa.criado_em}}</li>
+    <li>{{tarefa.modificado_em}}</li>
+</ul>
+<hr>
+<a href="{% url 'lista_tarefas' %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}

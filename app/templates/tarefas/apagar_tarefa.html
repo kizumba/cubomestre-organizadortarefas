@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block page_title %}
+Tarefas
+{% endblock %}
+
+{% block content %}
+
+<h1>Apagar tarefa</h1>
+<p>Você deseja realmente apagar o projeto <b>{{tarefa.nome}}</b>?</p>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Apagar" class="btn btn-danger">
+    <a href="{% url 'lista_tarefas' %}" class="btn btn-secondary">Voltar</a>
+</form>
+
+{% endblock %}

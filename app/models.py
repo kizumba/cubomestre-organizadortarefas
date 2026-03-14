@@ -154,7 +154,7 @@ class Tarefa(models.Model):
     data_entrega_prevista = models.DateField(null=True, blank=True)
     data_entrega_real = models.DateField(null=True, blank=True)
     criado_em = models.DateTimeField(auto_now_add=True)
-    modidicado_em = models.DateTimeField(auto_now=True)
+    modificado_em = models.DateTimeField(auto_now=True)
 
     projeto = models.ForeignKey(to=Projeto, on_delete=models.CASCADE, related_name="tarefas")
     colaborador = models.ForeignKey(to=Funcionario, on_delete=models.SET_NULL, related_name="tarefas", null=True)

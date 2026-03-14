@@ -10,7 +10,7 @@ class ProjetoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["gerente"].queryset = Funcionario.objects.filter(cargo=2)
-        self.fields["gerente"].label_from_instance = self.label_from_instance_fruncionario
+        self.fields["gerente"].label_from_instance = self.label_from_instance_funcionario
 
-    def label_from_instance_fruncionario(self, obj):
+    def label_from_instance_funcionario(self, obj):
         return f"{obj.get_full_name()} - {obj.get_cargo_display()}"

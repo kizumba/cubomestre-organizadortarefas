@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+Tarefa
+{% endblock %}
+
+{% block content %}
+<h1>Projetos</h1>
+<a href="{% url 'criar_tarefa'%}" class="btn btn-primary">Cadastrar nova tarefa</a>
+<h2>Lista de tarefas</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Ativo</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Status</th>
+      <th scope="col">Data prevista</th>
+      <th scope="col">Data entrega</th>
+      <th scope="col">Habilidade</th>
+      <th scope="col">Colaborador</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tarefa in object_list %}
+    <tr>
+      <th scope="row">{{tarefa.pk}}</th>
+      <td>{{tarefa.nome}}</td>      
+      <td>{{tarefa.ativa}}</td>
+      <td>{{tarefa.descricao}}</td>  
+      <td>{{tarefa.get_status_display}}</td>        
+      <td>{{tarefa.data_entrega_prevista}}</td>
+      <td>{{tarefa.data_entrega_real}}</td>
+      <td>{{tarefa.habilidade.nome}}</td>
+      <td>{{tarefa.colaborador.username}}</td>
+      <td>
+        <a href="{% url 'detalhes_tarefa' pk=tarefa.pk %}" class="btn btn-secondary">Visualizar</a>
+        <a href="{% url 'atualizar_tarefa' pk=tarefa.pk %}" class="btn btn-primary">Editar</a>
+        <a href="{% url 'apagar_tarefa' pk=tarefa.pk %}" class="btn btn-danger">Apagar</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
