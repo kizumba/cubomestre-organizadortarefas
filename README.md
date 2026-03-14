@@ -1,12 +1,20 @@
-# Atualização do CRUD
+# CRUD Administrador
 |Entidade|Create|Read|Update|Delete|
 |---|---|---|---|---|
 |Funcionário|X|X|X|X|
 |Tipo de Funcionário|X|X|X|X|
 |Cliente|X|X|X|X|
 |Habilidade|X|X|X|X|
-|Projeto|-|-|-|-|
-|Tarefa|-|-|-|-|
+|Projeto|X|X|X|X|
+|Tarefa|X|X|X|X|
+
+# Área do Gerente
+- [ ] Página para gerenciar seus próprios projetos. O gerente só pode ver os projetos que criou.
+- [ ] Página para criar tarefas do projeto
+
+# Área do Colaborador
+- [ ] Página para gerenciar tarefas
+- [ ] Página com todas as tarefas concluídas
 
 # Cubo Mestre
 Primeiro projeto da empresa Cubo Mestre. Projeto piloto para desenvolver as habilidades pessoais e em grupo. O foco é desenvolver uma aplicação para gerenciar projetos segmentando-o em partes menores chamadas de tarefas. Cada Tarefa pode ser executada por um, e somente um, colaborador.
