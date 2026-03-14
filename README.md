@@ -1,4 +1,6 @@
-# CRUD Administrador
+# Atualizações 
+
+## CRUD Administrador
 |Entidade|Create|Read|Update|Delete|
 |---|---|---|---|---|
 |Funcionário|X|X|X|X|
@@ -8,11 +10,11 @@
 |Projeto|X|X|X|X|
 |Tarefa|X|X|X|X|
 
-# Área do Gerente
+## Área do Gerente
 - [ ] Página para gerenciar seus próprios projetos. O gerente só pode ver os projetos que criou.
 - [ ] Página para criar tarefas do projeto
 
-# Área do Colaborador
+## Área do Colaborador
 - [ ] Página para gerenciar tarefas
 - [ ] Página com todas as tarefas concluídas
 
