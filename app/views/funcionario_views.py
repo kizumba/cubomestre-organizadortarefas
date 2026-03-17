@@ -40,6 +40,10 @@ class FuncionarioCreateView(UserPassesTestMixin, CreateView):
             endereco = endereco_form.save()
             funcionario = funcionario_form.save(commit=False)
             funcionario.endereco = endereco
+
+            senha = funcionario_form.cleaned_data.get("password1")
+            if senha: 
+                funcionario.set_password(senha)
             funcionario.save()
             
             habilidades_selecionadas = request.POST.getlist('habilidades')

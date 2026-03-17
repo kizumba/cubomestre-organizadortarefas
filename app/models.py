@@ -86,22 +86,24 @@ class Funcionario(AbstractUser):
         (2, "Gerente"),
         (3, "Colaborador")
     )
-    data_nascimento = models.DateField()
-    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, null=False, blank=False)
-    cpf = models.CharField(max_length=11, unique=True)
-    salario = models.DecimalField(max_digits=10,decimal_places=2)
-    cargo = models.IntegerField(choices=CARGO_CHOICES)
+    data_nascimento = models.DateField(null=True, blank=True)
+    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, null=True, blank=True)
+    cpf = models.CharField(max_length=11, unique=True, null=True, blank=True)
+    salario = models.DecimalField(max_digits=10,decimal_places=2, null=True, blank=True)
+    cargo = models.IntegerField(choices=CARGO_CHOICES, null=True, blank=False)
     data_contratacao = models.DateField(auto_now_add=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     modificado_em = models.DateTimeField(auto_now=True)
-    telefone = models.CharField(max_length=20)
-    endereco = models.ForeignKey(to=Endereco, on_delete=models.CASCADE, related_name="funcionario")
+    telefone = models.CharField(max_length=20, null=True, blank=True)
+    endereco = models.ForeignKey(to=Endereco, on_delete=models.CASCADE, related_name="funcionario", null=True, blank=True)
     
     habilidades = models.ManyToManyField(
         "Habilidade",
         through="FuncionarioHabilidade",
         through_fields=("colaborador", "habilidade"),
-        related_name="funcionarios"
+        related_name="funcionarios",
+        null=True,
+        blank=True
     )
 
     def __str__(self):

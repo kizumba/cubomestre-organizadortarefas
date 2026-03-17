@@ -25,15 +25,18 @@
                             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                         </li>
                         {% if user.is_authenticated %}
-                        {% if user.cargo == 1 %}
+                        {% if user.is_superuser %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'lista_funcionarios' %}">Funcionários</a>
                         </li>
+                        {% endif %}
+                        {% if user.cargo == 2 %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'lista_clientes' %}">Clientes</a>
                         </li>
                         {% endif %}
-                        {% if user.cargo == 2 or user.cargo == 1%}
+                     
+                        {% if user.cargo == 2 %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'lista_habilidades' %}">Habilidades</a>
                         </li>
@@ -41,7 +44,7 @@
                             <a class="nav-link" href="{% url 'lista_projetos' %}">Projetos</a>
                         </li>
                         {% endif %}
-                        {% if user.cargo == 3 or user.cargo == 1%}
+                        {% if user.cargo == 3 %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'lista_tarefas' %}">Tarefas</a>
                         </li>
