@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+Dashboard  
+{% endblock %}
+
+{% block content %}
+<hr>
+{{gerente.last_name}}
+<hr class="border border-primary border-3 opacity-75">
+<a href="" class="btn btn-primary">Criar projeto</a>
+<hr class="border border-danger border-2 opacity-50">
+<h2>Lista de Projetos</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Data prevista</th>
+      <th scope="col">Data real</th>
+      <th scope="col">Data Ativo</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for projeto in projetos %}
+    <tr>
+      <th scope="row">{{projeto.pk}}</th>
+      <td>{{projeto.nome}}</td>
+      <td>{{projeto.descricao}}</td>
+      <td>{{projeto.data_entrega_prevista}}</td>
+      <td>{{projeto.data_entrega_real}}</td>
+      <td>{{projeto.is_ativo}}</td>
+      <td>
+        <a href="" class="btn btn-warning btn-sm">Tarefa</a>
+        <a href="" class="btn btn-secondary btn-sm">Visualizar</a>
+        <a href="" class="btn btn-primary btn-sm">Editar</a>
+        <a href="" class="btn btn-danger btn-sm">Encerrar</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

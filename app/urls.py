@@ -41,6 +41,8 @@ from app.views.autenticacao_views import (
     AlterarSenhaView,
 )
 
+from app.views.gerente_views import GerenteDashboard
+
 urlpatterns = [   
     # Funcionário
     path("form_funcionario", FuncionarioCreateView.as_view(),name="criar_funcionario"),
@@ -80,4 +82,7 @@ urlpatterns = [
     path("login", LoginView.as_view(), name="login"),
     path("logout", LogoutView.as_view(), name="logout"),
     path("alterar_senha", AlterarSenhaView.as_view(), name="alterar_senha"),
+
+    # Gerente Dashboard
+    path("gerente/<int:pk>", GerenteDashboard.as_view(), name="gerente_dashboard"),
 ]
