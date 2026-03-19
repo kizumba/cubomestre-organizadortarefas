@@ -7,8 +7,42 @@ Dashboard
 {% block content %}
 
 <hr class="border border-primary border-3 opacity-75">
-<a href="" class="btn btn-primary">Criar projeto</a>
+<!-- <a href="" class="btn btn-primary">Criar projeto</a> -->
+<div class="dropdown">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    +Projeto
+  </button>
+  <div class="dropdown-menu p-4" style="min-width: 400px;">
+    <form method="post" action="">
+      {% csrf_token %}
+      <div class="form-group">
+        <label class="form-label">Nome do projeto</label>
+        <input class="form-control" type="text" name="nome" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descrição</label>
+        <input class="form-control" type="text" name="descricao" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Custo</label>
+        <input class="form-control" type="text" name="custo" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Clientes disponíveis</label>
+        <select class="form-control" name="cliente" required>
+          <option value="" selected disabled>Selecione um cliente</option>
+          {% for cliente in clientes %}
+          <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success">Criar</button>
+    </form>
+  </div>
+</div>
 <hr class="border border-danger border-2 opacity-50">
+<hr>
+
 <h2>Lista de Projetos</h2>
 <table class="table">
   <thead>
@@ -18,7 +52,7 @@ Dashboard
       <th scope="col">Descrição</th>
       <th scope="col">Data prevista</th>
       <th scope="col">Data real</th>
-      <th scope="col">Data Ativo</th>
+      <th scope="col">Ativo</th>
       <th scope="col">Ações</th>
     </tr>
   </thead>
@@ -32,7 +66,7 @@ Dashboard
       <td>{{projeto.data_entrega_real}}</td>
       <td>{{projeto.is_ativo}}</td>
       <td>
-        <a href="" class="btn btn-warning btn-sm">Tarefa</a>
+        <a href="" class="btn btn-warning btn-sm">Tarefas</a>
         <a href="" class="btn btn-secondary btn-sm">Visualizar</a>
         <a href="" class="btn btn-primary btn-sm">Editar</a>
         <a href="" class="btn btn-danger btn-sm">Encerrar</a>

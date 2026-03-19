@@ -85,4 +85,5 @@ urlpatterns = [
 
     # Gerente Dashboard
     path("gerente/<int:pk>", GerenteDashboard.as_view(), name="gerente_dashboard"),
+
 ]
