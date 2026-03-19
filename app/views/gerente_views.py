@@ -11,8 +11,8 @@ class GerenteDashboard(View):
     def get(self, request, *args, **kwargs):
         context = {}
 
-        projetos = Projeto.objects.all()
         gerente = Funcionario.objects.get(pk=kwargs["pk"])
+        projetos = Projeto.objects.filter(gerente=gerente)
         funcionarios = Funcionario.objects.all()
         tarefas = Tarefa.objects.all()
         habilidades = Habilidade.objects.all()

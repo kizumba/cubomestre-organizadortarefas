@@ -16,7 +16,14 @@ class LoginView(View):
         usuario = authenticate(request, username=username, password=password)
         if usuario:
             login(request, usuario)
-            return redirect("home")
+
+            if hasattr(usuario, "cargo"):
+                if usuario.cargo == 2:
+                    return redirect("gerente_dashboard", pk=usuario.pk)
+                else:
+                    return redirect("home")
+            else:
+                return redirect("home")
         else:
             form_login = AuthenticationForm()
             return render(
